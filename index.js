@@ -1,7 +1,9 @@
-// src/app.js
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const weatherRoutes = require('./routes/weatherRoutes');
+const weatherRoutes = require('./src/routes/weatherRoutes');
+const connectDB = require('./src/db/connect');
+
 
 app.use(express.json());
 
@@ -9,6 +11,15 @@ app.use(express.json());
 app.use('/weather', weatherRoutes);
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+const start = async () => {
+    try {
+        await connectDB(process.env.MONGO_URL);
+        app.listen(PORT, () =>
+            console.log(`Server is listening on port ${PORT}...`)
+        );
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+start();
