@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Routes
 app.use('/weather', weatherRoutes);
-app.use('/', geolocation);
+app.use('/geolocation', geolocation);
 
 const PORT = process.env.PORT || 3000;
 const start = async () => {

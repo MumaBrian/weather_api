@@ -6,4 +6,5 @@ const weatherController = require('../controllers/weatherController');
 router.post('/current', weatherController.getCurrentWeather);
 router.get('/past', weatherController.getPastWeather);
 
+
 module.exports = router;

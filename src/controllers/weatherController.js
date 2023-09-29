@@ -12,7 +12,6 @@ async function getCurrentWeather(req, res) {
 }
 
 async function getPastWeather(req, res) {
-    const { city, date } = req.body;
     try {
         const data = await weatherService.getPastWeather();
         res.json(data);

@@ -37,6 +37,7 @@ async function getPastWeather() {
     }
 }
 
+
 module.exports = {
     getCurrentWeather,
     getPastWeather,
