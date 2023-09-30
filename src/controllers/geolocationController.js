@@ -11,4 +11,8 @@ async function getGeolocation(req, res) {
     }
 }
 
-module.exports = {getGeolocation}
+
+module.exports = {
+    getGeolocation,
+    
+}
