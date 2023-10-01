@@ -1,5 +1,4 @@
 const axios = require('axios');
-const unirest = require("unirest");
 
 
 const API_KEY = process.env.API_KEY
@@ -28,8 +27,8 @@ async function getGeolocation(latitude, longitude) {
 
 }
 
- 
 
 module.exports = {
     getGeolocation,
+    // getCurrentWeather
 }

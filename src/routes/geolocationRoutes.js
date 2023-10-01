@@ -3,7 +3,7 @@ const unirest = require("unirest");
 const router = express.Router();
 const geolocationController = require('../controllers/geolocationController')
 
-router.post('/geolocation', geolocationController.getGeolocation);
+router.get('/geolocation', geolocationController.getGeolocation);
 router.get("/", (req, res) => {
     var apiCall = unirest("GET",
         "https://ip-geolocation-ipwhois-io.p.rapidapi.com/json/"

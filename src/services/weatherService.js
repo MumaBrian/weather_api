@@ -1,31 +1,44 @@
 const axios = require('axios');
-const WeatherData = require('../models/model')
+const WeatherData = require('../models/model');
+const { language } = require('googleapis/build/src/apis/language');
 
+const apiKey = process.env.API
 
-const API_KEY = process.env.API_KEY
-async function getCurrentWeather(city) {
+const baseUrl = 'http://api.weatherapi.com/v1';
+async function getCurrentWeather(location) {
     try {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city},&APPID=${API_KEY}`);
-
-        const weatherData = {
-            city: city,
-            temperature: response.data.main.temp,
-            humidity: response.data.main.humidity,
-            description: response.data.weather[0].description,
-            main: response.data.main,
-            weather: response.data.weather,
-            coordinates: response.data.coord,
-            country: response.data.sys.country
-        };
-
-        const newWeatherData = new WeatherData(weatherData);
-        await newWeatherData.save();
-
+        const response = await axios.get(`${baseUrl}/current.json?key=${apiKey}&q=${location}`);
         return response.data;
     } catch (error) {
+        // Handle errors here, e.g., log the error or throw an exception
+        console.error('Error fetching current weather:', error.message);
         throw error;
     }
 }
+
+async function getWeatherForecast(q,days,date,hour,language,alerts) {
+    try {
+        const response = await axios.get(`${baseUrl}/forecast.json?key=${apiKey}&q=${q}&days=${days}&dt=${date}&hour=${hour}&alerts${alerts}&lang${language}`);
+        return response.data;
+    } catch (error) {
+        // Handle errors here, e.g., log the error or throw an exception
+        console.error('Error fetching current weather:', error.message);
+        throw error;
+    }
+}
+
+async function getWeatherHistory(q, end_dt, date, hour, language) {
+    try {
+        const response = await axios.get(`${baseUrl}/history.json?key=${apiKey}&q=${q}&dt=${date}&end_dt=${end_dt}&hour=${hour}&lang${language}`);
+        return response.data;
+    } catch (error) {
+        // Handle errors here, e.g., log the error or throw an exception
+        console.error('Error fetching current weather:', error.message);
+        throw error;
+    }
+}
+
+
 
 async function getPastWeather() {
     try {
@@ -41,4 +54,6 @@ async function getPastWeather() {
 module.exports = {
     getCurrentWeather,
     getPastWeather,
+    getWeatherForecast,
+    getWeatherHistory
 };
