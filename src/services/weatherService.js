@@ -1,6 +1,5 @@
 const axios = require('axios');
 const WeatherData = require('../models/model');
-const { language } = require('googleapis/build/src/apis/language');
 
 const apiKey = process.env.API
 
@@ -37,6 +36,18 @@ async function getWeatherHistory(q, end_dt, date, hour, language) {
         throw error;
     }
 }
+
+async function getWeatherHistory(q, end_dt, date, hour, language) {
+    try {
+        const response = await axios.get(`${baseUrl}/history.json?key=${apiKey}&q=${q}&dt=${date}&end_dt=${end_dt}&hour=${hour}&lang${language}`);
+        return response.data;
+    } catch (error) {
+        // Handle errors here, e.g., log the error or throw an exception
+        console.error('Error fetching current weather:', error.message);
+        throw error;
+    }
+}
+
 
 
 

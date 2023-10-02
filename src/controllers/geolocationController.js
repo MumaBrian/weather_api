@@ -11,11 +11,44 @@ async function getGeolocation(req, res) {
     }
 }
 
+async function searchLocation(req, res) {
+    const {q} = req.body;
+    try {
+        const data = await geolocationService.searchLocation(q);
+        res.json(data);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Unable to search location data' });
+    }
+}
+
+async function ipLookup(req, res) {
+    const { q } = req.body;
+    try {
+        const data = await geolocationService.ipLookup(q);
+        res.json(data);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Unable to search location data' });
+    }
+}
+
+async function searchTimezone(req, res) {
+    const { q } = req.body;
+    try {
+        const data = await geolocationService.searchTimezone(q);
+        res.json(data);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Unable to search location data' });
+    }
+}
 
 
 
 module.exports = {
     getGeolocation,
-    // getCurrentWeather
-    
+    searchLocation,
+    searchTimezone,
+    ipLookup
 }

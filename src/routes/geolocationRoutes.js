@@ -19,5 +19,9 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get('/search',geolocationController.searchLocation)
+router.get('/ip', geolocationController.ipLookup)
+router.get('/timezone', geolocationController.searchTimezone)
+
 module.exports = router
 
