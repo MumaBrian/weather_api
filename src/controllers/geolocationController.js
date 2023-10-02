@@ -44,11 +44,22 @@ async function searchTimezone(req, res) {
     }
 }
 
+async function searchSports(req, res) {
+    const { q } = req.body;
+    try {
+        const data = await geolocationService.searchSports(q);
+        res.json(data);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Unable to search location data' });
+    }
+}
 
 
 module.exports = {
     getGeolocation,
     searchLocation,
     searchTimezone,
-    ipLookup
+    ipLookup,
+    searchSports
 }

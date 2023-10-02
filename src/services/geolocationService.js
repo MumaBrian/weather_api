@@ -60,9 +60,22 @@ async function searchTimezone(q) {
     }
 }
 
+
+async function searchSports(q) {
+    try {
+        const response = await axios.get(`${baseUrl}/sports.json?key=${apiKey}&q=${q}`);
+        return response.data;
+    } catch (error) {
+        // Handle errors here, e.g., log the error or throw an exception
+        console.error('Error fetching sports:', error.message);
+        throw error;
+    }
+}
+
 module.exports = {
     getGeolocation,
     searchLocation,
     ipLookup,
-    searchTimezone
+    searchTimezone,
+    searchSports
 }

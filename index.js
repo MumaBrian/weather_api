@@ -8,6 +8,7 @@ const connectDB = require('./src/db/connect');
 
 
 app.use(express.json());
+app.use(express.static('./src/public'));
 
 // Routes
 app.use('/weather', weatherRoutes);
